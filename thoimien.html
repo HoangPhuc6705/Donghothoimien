@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đồng hồ thôi miên</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .main {
+      width: 10px;
+      height: 10px;
+      /* border: 1px solid black; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+    }
+
+    .main .len {
+      width: 1px;
+      height: 130vh;
+      background: black;
+      position: absolute;
+      transform: rotateZ(20deg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: animate 1.5s ease-in-out infinite;
+    }
+
+    @keyframes animate {
+      0% {
+        transform: rotateZ(20deg);
+      }
+
+      50% {
+        transform: rotateZ(-20deg);
+      }
+
+      100% {
+        transform: rotateZ(20deg);
+      }
+    }
+
+    .main .len .clock {
+      position: absolute;
+      bottom: 0%;
+      width: 150px;
+      height: 150px;
+      border: 2px solid black;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .clock p {
+      position: absolute;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .clock p:nth-child(1) {
+      top: 3%;
+    }
+    .clock p:nth-child(2) {
+      right: 3%;
+    }
+    .clock p:nth-child(3) {
+      bottom: 3%;
+    }
+    .clock p:nth-child(4) {
+      left: 3%;
+    }
+    /* .clock p:nth-child(5) {
+      top: 3%;
+      right: 8.333333%;
+    } */
+
+    .clock::before {
+      content: '';
+      position: absolute;
+      width: 5%;
+      height: 5%;
+      border-radius: 50%;
+      background: black;
+    }
+
+    #hh,
+    #mm,
+    #ss {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #hh {
+      width: 50%;
+      height: 50%;
+    }
+
+    #hh::before {
+      content: '';
+      position: absolute;
+      width: 6%;
+      height: 50%;
+      background: black;
+      top: 0%;
+      border-radius: 10px 10px 0 0;
+    }
+
+    #mm {
+      width: 60%;
+      height: 60%;
+    }
+
+    #mm::before {
+      content: '';
+      position: absolute;
+      width: 3%;
+      height: 50%;
+      background: black;
+      top: 0%;
+      border-radius: 10px 10px 0 0;
+    }
+
+    #ss {
+      width: 70%;
+      height: 70%;
+    }
+
+    #ss::before {
+      content: '';
+      position: absolute;
+      width: 1%;
+      height: 50%;
+      background: black;
+      top: 0%;
+      border-radius: 10px 10px 0 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="len">
+      <div class="clock">
+        <p>12</p>
+        <p>3</p>
+        <p>6</p>
+        <p>9</p>
+        <!-- <p>1</p> -->
+        <div id="hh"></div>
+        <div id="mm"></div>
+        <div id="ss"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var Timer = () => {
+      var value = new Date();
+      var hh, mm, ss;
+      hh = value.getHours() * 30;
+      mm = value.getMinutes() * 6;
+      ss = value.getSeconds() * 6;
+      document.getElementById('hh').style.transform = `rotateZ(${hh + (mm / 12)}deg)`;
+      document.getElementById('mm').style.transform = `rotateZ(${mm + (ss / 60)}deg)`;
+      document.getElementById('ss').style.transform = `rotateZ(${ss}deg)`;
+    }
+    Timer();
+    setInterval(Timer, 1000);
+  </script>
+</body>
+
+</html>
